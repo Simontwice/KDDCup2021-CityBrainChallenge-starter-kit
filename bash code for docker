@@ -1,0 +1,4 @@
+docker run -it -v /home/szymon/Downloads/KDDCup2021-CityBrainChallenge-starter-kit:/starter-kit citybrainchallenge/cbengine:0.1.2 bash
+cd starter-kit
+python3 evaluate.py --input_dir agent --output_dir out --sim_cfg cfg/simulator.cfg --metric_period 200
+
