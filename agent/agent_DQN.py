@@ -65,7 +65,7 @@ class TestAgent():
         # self.load_model(path, 99)
 
         self.now_step = 0
-        self.current_phase = {}
+        self.current_phase = {} #PHASES AS SEEN BY MODEL, NOT ENVIRONMENT!!!!! SO REFER TO THE PAPER
         self.base_car_time = 2
         self.delay = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         self.max_phase = 4  # only using the first 4 phases so far
@@ -89,6 +89,14 @@ class TestAgent():
         self.road_map = {}
 
     ################################
+    def load_info(self,args):
+        self.memory = deque(maxlen = args.memory_size)
+        self.model_name = args.model_name
+        self.batch_size = args.batch_size
+        self.roadnet_size = args.roadnet_size
+        self.epsilon = args.epsilon
+        self.learning_rate = args.learning_rate
+        self.update_model_freq = args.update_freq
     # don't modify this function.
     # agent_list is a list of agent_id
     def load_agent_list(self,agent_list):
@@ -121,7 +129,7 @@ class TestAgent():
         self.usable_phases = {}
         for agent in self.agent_list:
             self.agent_topology[agent] = self.which_topology((agents[agent])[0:4])
-            self.current_phase[agent] = 1
+            self.current_phase[agent] = 7
         self.load_road_mapping()
         self.load_traffic_signal_dataset(road_path)
         self.inverse_traffic_signal_dataset_2()
@@ -493,14 +501,11 @@ class TestAgent():
     def phase_to_input(self,phase):
         if len(phase.shape) in {0}:
             #print("UWAGA ZMIENIONE#########################",phase)
-            print(PHASE_TO_VEC[phase])
-            assert (PHASE_TO_VEC[phase] == PHASE_TO_VEC[1]).all()
             return PHASE_TO_VEC[phase]
             #return PHASE_TO_VEC[phase, :]
         elif len(phase.shape) in {1}:
             a = np.asarray([PHASE_TO_VEC[x, :] for x in phase])
             return a
-            print(a)
         else:
             raise NotImplementedError
 
@@ -517,6 +522,7 @@ class TestAgent():
         actions = {}
         for agent_id in self.agent_list:
             action = self.get_action(observations_for_agent[agent_id])
+            self.current_phase[agent_id] = action
             action = self.model_env_interface(action)
             assert action in {1, 2, 3, 4, 5, 6, 7, 8}
             actions[agent_id] = action
@@ -540,7 +546,6 @@ class TestAgent():
         if len(ob.shape)==1:
             congestion = ob[:-1]
             phase = ob[-1]
-            assert(phase == 1)
             a=[self.phase_to_input(phase).reshape(1,-1), self.permutation_engine_to_model(congestion).reshape(1,-1)]
             return a
         elif 1:
@@ -573,6 +578,7 @@ class TestAgent():
         else:
             ob2 = self.preprocess_for_step(ob)
             act_values = self.model_A.predict(ob2)+self.model_B.predict(ob2)
+            #print("act_values: ",act_values[0])
             return np.argmax(act_values[0])
 
     def sample(self):

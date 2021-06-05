@@ -279,11 +279,12 @@ def process_score(log_path,roads,step,scores_dir):
     return result_write['data']['total_served_vehicles'],result_write['data']['delay_index']
 
 
-def train(agent_spec, simulator_cfg_file, gym_cfg,args):
+def train(agent_spec, gym_cfg, args):
     logger.info("\n")
     logger.info("*" * 40)
 
     gym_configs = gym_cfg.cfg
+    simulator_cfg_file = args.sim_cfg
     simulator_configs = read_config(simulator_cfg_file)
     env = gym.make(
         'CBEngine-v0',
@@ -311,6 +312,7 @@ def train(agent_spec, simulator_cfg_file, gym_cfg,args):
         agent_id_list.append(int(k.split('_')[0]))
     agent_id_list = list(set(agent_id_list))
     agent = agent_spec[scenario[0]]
+    agent.load_info(args)
     agent.load_agent_list(agent_id_list)
     agent.load_roadnet(intersections,roads,agents,roadnet_for_agent_loading)
     # Here begins the code for training
@@ -578,7 +580,7 @@ if __name__ == "__main__":
         default=1.6,
         type=float
     )
-    parser.add_argument('--model_name', type=int, default=8, help='model to load name')
+    parser.add_argument('--model_name', type=str, default='None', help='model to load name')
     parser.add_argument('--memory_size', type=int, default=5000, help='size of memory')
     parser.add_argument('--batch_size', type=int, default=32, help='size of batch')
     parser.add_argument('--roadnet_size',choices = ['small','medium'], type=str, default="small", help='number of threads')
@@ -586,8 +588,8 @@ if __name__ == "__main__":
     parser.add_argument('--learning_rate',choices = [0.001,0.005,0.0005], type=float, default=0.001, help='number of threads')
     parser.add_argument('--thread', type=int, default=8, help='number of threads')
     parser.add_argument('--steps', type=int, default=360, help='number of steps')
-    parser.add_argument('--action_interval', type=int, default=2, help='how often agent make decisions')
     parser.add_argument('--episodes', type=int, default=100, help='training episodes')
+    parser.add_argument('--update_freq',choices = [10,50,100,200,500], type=int, default=100, help='training episodes')
 
     parser.add_argument('--save_model', action="store_true", default=True)
     parser.add_argument('--load_model', action="store_true", default=False)
@@ -637,7 +639,7 @@ if __name__ == "__main__":
     # simulation
     start_time = time.time()
     try:
-        train(agent_spec, simulator_cfg_file, gym_cfg, metric_period,args)
+        train(agent_spec, gym_cfg, args)
         #scores = run_simulation(agent_spec, simulator_cfg_file, gym_cfg, metric_period, scores_dir, threshold)
     except Exception as e:
         msg = format_exception(e)
