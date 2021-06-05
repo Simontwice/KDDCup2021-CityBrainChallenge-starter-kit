@@ -10,6 +10,7 @@ path = os.path.split(os.path.realpath(__file__))[0]
 import sys
 sys.path.append(path)
 import random
+from sys import getsizeof
 
 import gym
 
@@ -27,7 +28,7 @@ import numpy as np
 
 
 # contains all of the intersections
-
+#this matrix sends MODEL type phases to MODEL type vectors
 PHASE_TO_VEC = np.array([[1,0,0,0,1,0,0,0],
     [0,1,0,0,1,0,0,0],
     [1,0,0,0,0,1,0,0],
@@ -44,9 +45,9 @@ class TestAgent():
     def __init__(self):
 
         # DQN parameters
-        self.memory = deque(maxlen=20000)
-        self.learning_start = 10000
-        self.update_model_freq = 50
+        self.memory = deque(maxlen=2000)
+        self.learning_start = 2000
+        self.update_model_freq = 20
         self.gamma = 0.97  # discount rate
         self.epsilon = 0.1  # exploration rate
         self.epsilon_min = 0.01
@@ -55,18 +56,12 @@ class TestAgent():
         self.batch_size = 64
         self.action_space = 8
 
-        self.model_A, self.model_B = self._build_model()
-        self.reinitLayers(self.model_A)
-        self.reinitLayers(self.model_B)
-
-
         # Remember to uncomment the following lines when submitting, and submit your model file as well.
         # path = os.path.split(os.path.realpath(__file__))[0]
         # self.load_model(path, 99)
 
         self.now_step = 0
         self.current_phase = {} #PHASES AS SEEN BY MODEL, NOT ENVIRONMENT!!!!! SO REFER TO THE PAPER
-        self.base_car_time = 2
         self.delay = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         self.max_phase = 4  # only using the first 4 phases so far
         self.next_cycle_plan = {}  # the time of setting the next cycle
@@ -85,8 +80,9 @@ class TestAgent():
         self.intersections = {}
         self.roads = {}
         self.agents = {}
-        self.close_value = 50
         self.road_map = {}
+        self.model_name = "none"
+
 
     ################################
     def load_info(self,args):
@@ -96,7 +92,15 @@ class TestAgent():
         self.roadnet_size = args.roadnet_size
         self.epsilon = args.epsilon
         self.learning_rate = args.learning_rate
+        self.learning_start = args.memory_size
         self.update_model_freq = args.update_freq
+        self.gamma = args.gamma
+        self.close_value = args.close_value
+
+    def agent_init(self,args):
+        self.load_info(args)
+        self.model_A, self.model_B = self._build_model()
+
     # don't modify this function.
     # agent_list is a list of agent_id
     def load_agent_list(self,agent_list):
@@ -133,6 +137,7 @@ class TestAgent():
         self.load_road_mapping()
         self.load_traffic_signal_dataset(road_path)
         self.inverse_traffic_signal_dataset_2()
+
     ####################################################################################################################
     def find_last_line(self,path):
         with open(path) as f:
@@ -234,7 +239,7 @@ class TestAgent():
 
             # calculating waiting cars by speed <= 0
             if val['speed'][0] <= 0:
-                assert(self.get_road_length(val['road'][0]) - val['distance'][0]<2*self.close_value)
+                #assert(self.get_road_length(val['road'][0]) - val['distance'][0]<2*self.close_value)
                 vehicle_info[intersection_id][road_id][lane_dir]['waiting'] += 1
 
             else:
@@ -451,8 +456,8 @@ class TestAgent():
 #####################################################################################################################
     def process_env_ouput(self):
         """
-        works out the env type congestion vectors, as well as env type current phase
-        :return: concatenated cong vector and phase - so it is env type
+        works out the env type congestion vectors, as well as model type current phase
+        :return: concatenated cong vector and phase - so it is env type vec and model phase
         """
         observations_for_agent = {}
         for id in self.agent_list:
@@ -499,7 +504,11 @@ class TestAgent():
             return vector_of_congestion[:,[10,3,1,6,4,9,7,0]]
 
     def phase_to_input(self,phase):
+        if isinstance( phase, int):
+            assert (phase in {0, 1, 2, 3, 4, 5, 6, 7})
+            return PHASE_TO_VEC[phase]
         if len(phase.shape) in {0}:
+            assert(phase in {0,1,2,3,4,5,6,7})
             #print("UWAGA ZMIENIONE#########################",phase)
             return PHASE_TO_VEC[phase]
             #return PHASE_TO_VEC[phase, :]
@@ -539,13 +548,14 @@ class TestAgent():
     def preprocess_for_step(self,ob):
         """
         for information coming straight from the environment
-        :param ob: concatenated vector of congestion and phase number (in env notation)
+        :param ob: concatenated vector of congestion (in env notation)and phase number IN MODEL NOTATION
         :return: list of unpacked and translated to model: first is vector of movements
         used by the phase, second is congestion
         """
         if len(ob.shape)==1:
             congestion = ob[:-1]
             phase = ob[-1]
+            assert(phase in {0,1,2,3,4,5,6,7})
             a=[self.phase_to_input(phase).reshape(1,-1), self.permutation_engine_to_model(congestion).reshape(1,-1)]
             return a
         elif 1:
@@ -554,13 +564,15 @@ class TestAgent():
     def preprocess_for_memory(self,ob):
         """
         for information coming straight from the environment, maybe singular (1D array)
-        :param ob: concatenated vector of congestion and phase number (in env notation)
+        :param ob: concatenated vector of congestion and phase number (phase in model)
         :return: list of unpacked and translated to model: first is translated congestion, second is vector of movements
         used by the phase
         """
         if len(ob.shape)==1:
             congestion = ob[:-1]
             phase = ob[-1]
+            #phase = self.env_model_interface(phase)
+            assert(phase in {0,1,2,3,4,5,6,7})
             a=[self.phase_to_input(phase),self.permutation_engine_to_model(congestion)]
             return a
         elif 1:
@@ -590,8 +602,8 @@ class TestAgent():
 
         # Neural Net for Deep-Q learning Model
 
-        model_A = keras.models.load_model('keras_model.h5')
-        model_B = keras.models.load_model('keras_model.h5')
+        model_A = keras.models.load_model(self.model_name)
+        model_B = keras.models.load_model(self.model_name)
         #model.summary()
         return model_A,model_B
 
@@ -600,6 +612,7 @@ class TestAgent():
         a = self.preprocess_for_memory(ob)
         b = self.preprocess_for_memory(next_ob)
         model_action = self.env_model_interface(action)
+        assert(b[0] == self.phase_to_input(model_action)).all()
         self.memory.append((a, model_action, reward, b))
 
     def memory_extract(self,memory):
@@ -624,9 +637,11 @@ class TestAgent():
         obs, actions, rewards, next_obs, = self.memory_extract(minibatch)
         target = rewards + self.gamma * np.amax(a[1].predict(next_obs), axis=1)
         target_f = a[0].predict(obs)
+        #print(target_f)
+        print("how heavy is this?             ",getsizeof(self.memory)/1000000," MB")
         for i, action in enumerate(actions):
             target_f[i][action] = target[i]
-        a[0].fit(obs, target_f,batch_size = 64, epochs=1, verbose=0)
+        a[0].fit(obs, target_f,batch_size = 32, epochs=1, verbose=0)
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_decay
 

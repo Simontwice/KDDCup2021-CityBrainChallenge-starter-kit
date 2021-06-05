@@ -12,6 +12,8 @@ from pathlib import Path
 import re
 import gym
 import numpy as np
+import neptune.new as neptune
+
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__file__)
@@ -235,6 +237,7 @@ def process_delay_index(lines, roads, step):
                     current_road_pos = pos
             for pos in range(len(now_dict['route'])):
                 road_id = now_dict['route'][pos]
+                print(road_id)
                 if(pos == current_road_pos):
                     tt_f_r += (roads[road_id]['length'] -
                                now_dict['distance']) / roads[road_id]['speed_limit']
@@ -279,7 +282,7 @@ def process_score(log_path,roads,step,scores_dir):
     return result_write['data']['total_served_vehicles'],result_write['data']['delay_index']
 
 
-def train(agent_spec, gym_cfg, args):
+def train(agent_spec, gym_cfg, args,run):
     logger.info("\n")
     logger.info("*" * 40)
 
@@ -302,6 +305,7 @@ def train(agent_spec, gym_cfg, args):
     roadnet_path = Path(simulator_configs['road_file_addr'])
     roadnet_for_agent_loading = simulator_configs['road_file_addr']
 
+
     intersections, roads, agents = process_roadnet(roadnet_path)
 
     observations, infos = env.reset()
@@ -312,7 +316,7 @@ def train(agent_spec, gym_cfg, args):
         agent_id_list.append(int(k.split('_')[0]))
     agent_id_list = list(set(agent_id_list))
     agent = agent_spec[scenario[0]]
-    agent.load_info(args)
+    agent.agent_init(args)
     agent.load_agent_list(agent_id_list)
     agent.load_roadnet(intersections,roads,agents,roadnet_for_agent_loading)
     # Here begins the code for training
@@ -327,6 +331,7 @@ def train(agent_spec, gym_cfg, args):
     out_traffic_indices = [11, 13, 14, 16, 17, 19, 20, 21]
     # The main loop
     for e in range(args.episodes):
+
         print("----------------------------------------------------{}/{}".format(e, args.episodes))
         _ = env.reset()
         observations, rewards, dones, info = env.step({})  # an empty step for convenience, will not matter anyway
@@ -384,19 +389,12 @@ def train(agent_spec, gym_cfg, args):
 
             if all(dones.values()):
                 break
-        if e % args.save_rate == args.save_rate - 1:
-            if not os.path.exists(args.save_dir):
-                os.makedirs(args.save_dir)
-            agent.save_model(args.save_dir, e)
-        logger.info(
-            "episode:{}/{}, average travel time:{}".format(e, args.episodes, env.eng.get_average_travel_time()))
+
+        run["avg travel time"].log(env.eng.get_average_travel_time())
         for agent_id in agent_id_list:
-            #logger.info(
-            #    "agent:{}, mean_episode_reward:{}".format(agent_id,
-            #                                              episodes_rewards[agent_id] / 360))
-            logger.info(
-                "agent:{}, min_agent_reward:{}".format(agent_id,
-                                                          min(rewards_archive[agent_id])))
+            run["agent {} min reward".format(agent_id)].log(min(rewards_archive[agent_id]))
+        agent.save_model(args.save_dir, 0)
+        run["model"].upload("model/dqn_mine/new/dqn_agent_{}.h5".format(0))
 
 
 def run_simulation(agent_spec, simulator_cfg_file, gym_cfg,metric_period,scores_dir,threshold):
@@ -580,22 +578,23 @@ if __name__ == "__main__":
         default=1.6,
         type=float
     )
-    parser.add_argument('--model_name', type=str, default='None', help='model to load name')
+    parser.add_argument('--model_name', type=str, default='keras_model.h5', help='model to load name')
     parser.add_argument('--memory_size', type=int, default=5000, help='size of memory')
     parser.add_argument('--batch_size', type=int, default=32, help='size of batch')
     parser.add_argument('--roadnet_size',choices = ['small','medium'], type=str, default="small", help='number of threads')
-    parser.add_argument('--epsilon', choices = [0.1,0.15,0.2,0.25],type=float, default=0.1, help='number of threads')
+    parser.add_argument('--epsilon', choices = [0.1,0.15,0.2],type=float, default=0.1, help='number of threads')
+    parser.add_argument('--gamma', choices = [0.85,0.9,0.92,0.95,0.98,0.99],type=float, default=0.95, help='number of threads')
     parser.add_argument('--learning_rate',choices = [0.001,0.005,0.0005], type=float, default=0.001, help='number of threads')
     parser.add_argument('--thread', type=int, default=8, help='number of threads')
     parser.add_argument('--steps', type=int, default=360, help='number of steps')
     parser.add_argument('--episodes', type=int, default=100, help='training episodes')
-    parser.add_argument('--update_freq',choices = [10,50,100,200,500], type=int, default=100, help='training episodes')
-
+    parser.add_argument('--update_freq',choices = [10,25,50,100,200,500], type=int, default=100, help='training episodes')
+    parser.add_argument('--close_value',choices = [30,50,70,100], type=int, default=50, help='training episodes')
     parser.add_argument('--save_model', action="store_true", default=True)
     parser.add_argument('--load_model', action="store_true", default=False)
     parser.add_argument("--save_rate", type=int, default=10,
                         help="save model once every time this many episodes are completed")
-    parser.add_argument('--save_dir', type=str, default="model/dqn_mine",
+    parser.add_argument('--save_dir', type=str, default="model/dqn_mine/new",
                         help='directory in which model should be saved')
     parser.add_argument('--log_dir', type=str, default="cmd_log/dqn_warm_up", help='directory in which logs should be saved')
 
@@ -610,6 +609,11 @@ if __name__ == "__main__":
     }
 
     args = parser.parse_args()
+
+    run = neptune.init(api_token="eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9hcHAubmVwdHVuZS5haSIsImFwaV9rZXkiOiI5YzY5NDlmYy1lNzNhLTQ4NjEtODY2Ny1kODM4ZGYyMWFkMmYifQ==",
+                       project="simontwice/CityBrainChallenge")
+    run["parameters"] = vars(args)
+
     msg = None
     metric_period = args.metric_period
     threshold = args.threshold
@@ -639,7 +643,7 @@ if __name__ == "__main__":
     # simulation
     start_time = time.time()
     try:
-        train(agent_spec, gym_cfg, args)
+        train(agent_spec, gym_cfg, args,run)
         #scores = run_simulation(agent_spec, simulator_cfg_file, gym_cfg, metric_period, scores_dir, threshold)
     except Exception as e:
         msg = format_exception(e)
