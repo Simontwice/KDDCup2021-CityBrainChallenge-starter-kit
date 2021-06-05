@@ -1,0 +1,1 @@
+docker run -it -v /home/simontwice/KDDCup2021-CityBrainChallenge-starter-kit:/starter-kit citybrainchallenge/cbengine:0.1.2 bash
