@@ -282,7 +282,7 @@ def process_score(log_path,roads,step,scores_dir):
     return result_write['data']['total_served_vehicles'],result_write['data']['delay_index']
 
 
-def train(agent_spec, gym_cfg, args,run):
+def train(agent_spec, gym_cfg, args,run,scores_dir):
     logger.info("\n")
     logger.info("*" * 40)
 
@@ -322,7 +322,7 @@ def train(agent_spec, gym_cfg, args,run):
     # Here begins the code for training
 
     total_decision_num = 0
-    env.set_log(0)
+    #env.set_log(0)
     env.set_warning(0)
     env.set_ui(0)
     # agent.load_model(args.save_dir, 199)
@@ -395,6 +395,9 @@ def train(agent_spec, gym_cfg, args,run):
             run["agent {} min reward".format(agent_id)].log(min(rewards_archive[agent_id]))
         agent.save_model(args.save_dir, 0)
         run["model"].upload("model/dqn_mine/new/dqn_agent_{}.h5".format(0))
+        log_path = Path(simulator_configs['report_log_addr'])
+        tot_v, d_i = process_score(log_path, roads, 360 * 10 - 1, scores_dir)
+        run["delay index"].log(d_i)
 
 
 def run_simulation(agent_spec, simulator_cfg_file, gym_cfg,metric_period,scores_dir,threshold):
@@ -579,8 +582,9 @@ if __name__ == "__main__":
         type=float
     )
     parser.add_argument('--model_name', type=str, default='keras_model.h5', help='model to load name')
-    parser.add_argument('--memory_size', type=int, default=5000, help='size of memory')
+    parser.add_argument('--memory_size', type=int, default=50000000, help='size of memory')
     parser.add_argument('--batch_size', type=int, default=32, help='size of batch')
+    parser.add_argument('--learning_start', type=int, default=10000, help='number of threads')
     parser.add_argument('--roadnet_size',choices = ['small','medium'], type=str, default="small", help='number of threads')
     parser.add_argument('--epsilon', choices = [0.1,0.15,0.2],type=float, default=0.1, help='number of threads')
     parser.add_argument('--gamma', choices = [0.85,0.9,0.92,0.95,0.98,0.99],type=float, default=0.95, help='number of threads')
@@ -611,7 +615,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     run = neptune.init(api_token="eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9hcHAubmVwdHVuZS5haSIsImFwaV9rZXkiOiI5YzY5NDlmYy1lNzNhLTQ4NjEtODY2Ny1kODM4ZGYyMWFkMmYifQ==",
-                       project="simontwice/CityBrainChallenge")
+                       project="TensorCell/KDD")
     run["parameters"] = vars(args)
 
     msg = None
@@ -643,7 +647,7 @@ if __name__ == "__main__":
     # simulation
     start_time = time.time()
     try:
-        train(agent_spec, gym_cfg, args,run)
+        train(agent_spec, gym_cfg, args,run,scores_dir)
         #scores = run_simulation(agent_spec, simulator_cfg_file, gym_cfg, metric_period, scores_dir, threshold)
     except Exception as e:
         msg = format_exception(e)

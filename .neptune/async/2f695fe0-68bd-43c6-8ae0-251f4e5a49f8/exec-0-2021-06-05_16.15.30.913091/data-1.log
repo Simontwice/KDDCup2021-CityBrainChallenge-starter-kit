@@ -1,0 +1,54 @@
+{"obj": {"type": "AssignString", "path": ["sys", "name"], "value": "Untitled"}, "version": 1}
+{"obj": {"type": "AssignString", "path": ["sys", "description"], "value": ""}, "version": 2}
+{"obj": {"type": "AssignString", "path": ["sys", "hostname"], "value": "d01ab3e31bda"}, "version": 3}
+{"obj": {"type": "AssignBool", "path": ["sys", "failed"], "value": false}, "version": 4}
+{"obj": {"type": "ClearStringLog", "path": ["monitoring", "stdout"]}, "version": 5}
+{"obj": {"type": "ClearStringLog", "path": ["monitoring", "stderr"]}, "version": 6}
+{"obj": {"type": "AssignString", "path": ["source_code", "entrypoint"], "value": "train_dqn_example.py"}, "version": 7}
+{"obj": {"type": "UploadFileSet", "path": ["source_code", "files"], "file_globs": ["/starter-kit/train_dqn_example.py"], "reset": "False"}, "version": 8}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stdout"], "values": [{"value": "", "step": null, "ts": 1622909731.011101}]}, "version": 9}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stdout"], "values": [{"value": "https://app.neptune.ai/simontwice/CityBrainChallenge/e/CIT-19\n", "step": null, "ts": 1622909731.0116704}]}, "version": 10}
+{"obj": {"type": "AssignString", "path": ["parameters", "input_dir"], "value": "agent"}, "version": 11}
+{"obj": {"type": "AssignString", "path": ["parameters", "output_dir"], "value": "out"}, "version": 12}
+{"obj": {"type": "AssignString", "path": ["parameters", "sim_cfg"], "value": "cfg/simulator_medium.cfg"}, "version": 13}
+{"obj": {"type": "AssignInt", "path": ["parameters", "metric_period"], "value": 3600}, "version": 14}
+{"obj": {"type": "AssignFloat", "path": ["parameters", "threshold"], "value": 1.6}, "version": 15}
+{"obj": {"type": "AssignString", "path": ["parameters", "model_name"], "value": "models_for_him/round_0.h5"}, "version": 16}
+{"obj": {"type": "AssignInt", "path": ["parameters", "memory_size"], "value": 5000}, "version": 17}
+{"obj": {"type": "AssignInt", "path": ["parameters", "batch_size"], "value": 256}, "version": 18}
+{"obj": {"type": "AssignString", "path": ["parameters", "roadnet_size"], "value": "small"}, "version": 19}
+{"obj": {"type": "AssignFloat", "path": ["parameters", "epsilon"], "value": 0.15}, "version": 20}
+{"obj": {"type": "AssignFloat", "path": ["parameters", "gamma"], "value": 0.98}, "version": 21}
+{"obj": {"type": "AssignFloat", "path": ["parameters", "learning_rate"], "value": 0.005}, "version": 22}
+{"obj": {"type": "AssignInt", "path": ["parameters", "thread"], "value": 40}, "version": 23}
+{"obj": {"type": "AssignInt", "path": ["parameters", "steps"], "value": 360}, "version": 24}
+{"obj": {"type": "AssignInt", "path": ["parameters", "episodes"], "value": 100}, "version": 25}
+{"obj": {"type": "AssignInt", "path": ["parameters", "update_freq"], "value": 100}, "version": 26}
+{"obj": {"type": "AssignInt", "path": ["parameters", "close_value"], "value": 100}, "version": 27}
+{"obj": {"type": "AssignBool", "path": ["parameters", "save_model"], "value": true}, "version": 28}
+{"obj": {"type": "AssignBool", "path": ["parameters", "load_model"], "value": false}, "version": 29}
+{"obj": {"type": "AssignInt", "path": ["parameters", "save_rate"], "value": 10}, "version": 30}
+{"obj": {"type": "AssignString", "path": ["parameters", "save_dir"], "value": "model/dqn_mine/new"}, "version": 31}
+{"obj": {"type": "AssignString", "path": ["parameters", "log_dir"], "value": "cmd_log/dqn_warm_up"}, "version": 32}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "Using TensorFlow backend.\n", "step": null, "ts": 1622909732.1832526}]}, "version": 33}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stdout"], "values": [{"value": "----------------------------------------------------0/100", "step": null, "ts": 1622909737.017177}]}, "version": 34}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stdout"], "values": [{"value": "\n", "step": null, "ts": 1622909737.017493}]}, "version": 35}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "traceback"], "values": [{"value": "An uncaught exception occurred while run was active on worker d01ab3e31bda.", "step": null, "ts": 1622909772.824118}, {"value": "Marking run as failed", "step": null, "ts": 1622909772.824118}, {"value": "Traceback:", "step": null, "ts": 1622909772.824118}, {"value": "  File \"train_dqn_example.py\", line 646, in <module>\n    train(agent_spec, gym_cfg, args,run)\n", "step": null, "ts": 1622909772.824118}, {"value": "  File \"train_dqn_example.py\", line 362, in train\n    observations, rewards, dones, info = env.step(actions)\n", "step": null, "ts": 1622909772.824118}, {"value": "  File \"/usr/local/lib/python3.7/dist-packages/CBEngine/envs/CBEngine.py\", line 168, in step\n    self.eng.next_step()\n", "step": null, "ts": 1622909772.824118}, {"value": "", "step": null, "ts": 1622909772.824118}]}, "version": 36}
+{"obj": {"type": "AssignBool", "path": ["sys", "failed"], "value": true}, "version": 37}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "Traceback (most recent call last):\n", "step": null, "ts": 1622909772.8747275}]}, "version": 38}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"train_dqn_example.py\", line 646, in <module>\n", "step": null, "ts": 1622909772.8850636}]}, "version": 39}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622909772.892328}]}, "version": 40}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "train(agent_spec, gym_cfg, args,run)", "step": null, "ts": 1622909772.8925}]}, "version": 41}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622909772.8927877}]}, "version": 42}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"train_dqn_example.py\", line 362, in train\n", "step": null, "ts": 1622909772.893136}]}, "version": 43}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622909772.8935623}]}, "version": 44}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "observations, rewards, dones, info = env.step(actions)", "step": null, "ts": 1622909772.893737}]}, "version": 45}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622909772.8940032}]}, "version": 46}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/usr/local/lib/python3.7/dist-packages/CBEngine/envs/CBEngine.py\", line 168, in step\n", "step": null, "ts": 1622909772.894338}]}, "version": 47}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622909772.8947148}]}, "version": 48}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "self.eng.next_step()", "step": null, "ts": 1622909772.8948872}]}, "version": 49}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622909772.8951864}]}, "version": 50}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "KeyboardInterrupt", "step": null, "ts": 1622909772.895489}]}, "version": 51}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "", "step": null, "ts": 1622909772.8957775}]}, "version": 52}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622909772.8960714}]}, "version": 53}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stdout"], "values": [{"value": "Shutting down background jobs, please wait a moment...\n", "step": null, "ts": 1622909772.896641}]}, "version": 54}

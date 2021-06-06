@@ -1,0 +1,68 @@
+{"obj": {"type": "AssignString", "path": ["sys", "name"], "value": "Untitled"}, "version": 1}
+{"obj": {"type": "AssignString", "path": ["sys", "description"], "value": ""}, "version": 2}
+{"obj": {"type": "AssignString", "path": ["sys", "hostname"], "value": "d01ab3e31bda"}, "version": 3}
+{"obj": {"type": "AssignBool", "path": ["sys", "failed"], "value": false}, "version": 4}
+{"obj": {"type": "ClearStringLog", "path": ["monitoring", "stdout"]}, "version": 5}
+{"obj": {"type": "ClearStringLog", "path": ["monitoring", "stderr"]}, "version": 6}
+{"obj": {"type": "AssignString", "path": ["source_code", "entrypoint"], "value": "train_dqn_example.py"}, "version": 7}
+{"obj": {"type": "UploadFileSet", "path": ["source_code", "files"], "file_globs": ["/starter-kit/train_dqn_example.py"], "reset": "False"}, "version": 8}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stdout"], "values": [{"value": "", "step": null, "ts": 1622941667.0133832}]}, "version": 9}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stdout"], "values": [{"value": "https://app.neptune.ai/TensorCell/KDD/e/KDD-6\n", "step": null, "ts": 1622941667.0143085}]}, "version": 10}
+{"obj": {"type": "AssignString", "path": ["parameters", "input_dir"], "value": "agent"}, "version": 11}
+{"obj": {"type": "AssignString", "path": ["parameters", "output_dir"], "value": "out"}, "version": 12}
+{"obj": {"type": "AssignString", "path": ["parameters", "sim_cfg"], "value": "cfg/simulator_small.cfg"}, "version": 13}
+{"obj": {"type": "AssignInt", "path": ["parameters", "metric_period"], "value": 3600}, "version": 14}
+{"obj": {"type": "AssignFloat", "path": ["parameters", "threshold"], "value": 1.6}, "version": 15}
+{"obj": {"type": "AssignString", "path": ["parameters", "model_name"], "value": "models_for_him/round_199.h5"}, "version": 16}
+{"obj": {"type": "AssignInt", "path": ["parameters", "memory_size"], "value": 50000000}, "version": 17}
+{"obj": {"type": "AssignInt", "path": ["parameters", "batch_size"], "value": 512}, "version": 18}
+{"obj": {"type": "AssignInt", "path": ["parameters", "learning_start"], "value": 20000}, "version": 19}
+{"obj": {"type": "AssignString", "path": ["parameters", "roadnet_size"], "value": "small"}, "version": 20}
+{"obj": {"type": "AssignFloat", "path": ["parameters", "epsilon"], "value": 0.1}, "version": 21}
+{"obj": {"type": "AssignFloat", "path": ["parameters", "gamma"], "value": 0.92}, "version": 22}
+{"obj": {"type": "AssignFloat", "path": ["parameters", "learning_rate"], "value": 0.005}, "version": 23}
+{"obj": {"type": "AssignInt", "path": ["parameters", "thread"], "value": 40}, "version": 24}
+{"obj": {"type": "AssignInt", "path": ["parameters", "steps"], "value": 360}, "version": 25}
+{"obj": {"type": "AssignInt", "path": ["parameters", "episodes"], "value": 100}, "version": 26}
+{"obj": {"type": "AssignInt", "path": ["parameters", "update_freq"], "value": 50}, "version": 27}
+{"obj": {"type": "AssignInt", "path": ["parameters", "close_value"], "value": 50}, "version": 28}
+{"obj": {"type": "AssignBool", "path": ["parameters", "save_model"], "value": true}, "version": 29}
+{"obj": {"type": "AssignBool", "path": ["parameters", "load_model"], "value": false}, "version": 30}
+{"obj": {"type": "AssignInt", "path": ["parameters", "save_rate"], "value": 10}, "version": 31}
+{"obj": {"type": "AssignString", "path": ["parameters", "save_dir"], "value": "model/dqn_mine/new"}, "version": 32}
+{"obj": {"type": "AssignString", "path": ["parameters", "log_dir"], "value": "cmd_log/dqn_warm_up"}, "version": 33}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "Using TensorFlow backend.\n", "step": null, "ts": 1622941668.2996628}]}, "version": 34}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stdout"], "values": [{"value": "----------------------------------------------------0/100", "step": null, "ts": 1622941673.287312}]}, "version": 35}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stdout"], "values": [{"value": "\n", "step": null, "ts": 1622941673.2876415}]}, "version": 36}
+{"obj": {"type": "LogFloats", "path": ["avg travel time"], "values": [{"value": 414.5730170496664, "step": null, "ts": 1622941718.6213381}]}, "version": 37}
+{"obj": {"type": "LogFloats", "path": ["agent 0 min reward"], "values": [{"value": -297.0, "step": null, "ts": 1622941718.62203}]}, "version": 38}
+{"obj": {"type": "UploadFile", "path": ["model"], "ext": "h5", "file_path": "/starter-kit/model/dqn_mine/new/dqn_agent_0.h5"}, "version": 39}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "traceback"], "values": [{"value": "An uncaught exception occurred while run was active on worker d01ab3e31bda.", "step": null, "ts": 1622941719.2138343}, {"value": "Marking run as failed", "step": null, "ts": 1622941719.2138343}, {"value": "Traceback:", "step": null, "ts": 1622941719.2138343}, {"value": "  File \"train_dqn_example.py\", line 656, in <module>\n    raise AssertionError()\n", "step": null, "ts": 1622941719.2138343}, {"value": "", "step": null, "ts": 1622941719.2138343}]}, "version": 40}
+{"obj": {"type": "AssignBool", "path": ["sys", "failed"], "value": true}, "version": 41}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "Traceback (most recent call last):\n", "step": null, "ts": 1622941719.2161126}]}, "version": 42}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"train_dqn_example.py\", line 650, in <module>\n", "step": null, "ts": 1622941719.2167292}]}, "version": 43}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622941719.2175226}]}, "version": 44}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "train(agent_spec, gym_cfg, args,run,scores_dir)", "step": null, "ts": 1622941719.2178526}]}, "version": 45}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622941719.2184868}]}, "version": 46}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"train_dqn_example.py\", line 399, in train\n", "step": null, "ts": 1622941719.2190824}]}, "version": 47}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622941719.2438707}]}, "version": 48}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "tot_v, d_i = process_score(log_path, roads, 360 * 10 - 1, scores_dir)", "step": null, "ts": 1622941719.2448354}]}, "version": 49}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622941719.2452722}]}, "version": 50}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"train_dqn_example.py\", line 269, in process_score\n", "step": null, "ts": 1622941719.2456245}]}, "version": 51}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622941719.2460825}]}, "version": 52}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "with open(log_path / \"info_step {}.log\".format(step)) as log_file:", "step": null, "ts": 1622941719.2462513}]}, "version": 53}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622941719.2466114}]}, "version": 54}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "FileNotFoundError", "step": null, "ts": 1622941719.246947}]}, "version": 55}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": ": ", "step": null, "ts": 1622941719.2472465}]}, "version": 56}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "[Errno 2] No such file or directory: 'log/info_step 3599.log'", "step": null, "ts": 1622941719.2475364}]}, "version": 57}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622941719.2478955}]}, "version": 58}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\nDuring handling of the above exception, another exception occurred:\n\n", "step": null, "ts": 1622941719.2481976}]}, "version": 59}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "Traceback (most recent call last):\n", "step": null, "ts": 1622941719.248518}]}, "version": 60}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"train_dqn_example.py\", line 656, in <module>\n", "step": null, "ts": 1622941719.2488477}]}, "version": 61}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622941719.249452}]}, "version": 62}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "raise AssertionError()", "step": null, "ts": 1622941719.2495902}]}, "version": 63}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622941719.2498844}]}, "version": 64}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "AssertionError", "step": null, "ts": 1622941719.2502067}]}, "version": 65}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "", "step": null, "ts": 1622941719.250521}]}, "version": 66}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622941719.250851}]}, "version": 67}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stdout"], "values": [{"value": "Shutting down background jobs, please wait a moment...\n", "step": null, "ts": 1622941719.2514393}]}, "version": 68}
