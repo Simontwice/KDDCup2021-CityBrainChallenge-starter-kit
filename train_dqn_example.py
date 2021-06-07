@@ -354,10 +354,12 @@ def train(agent_spec, gym_cfg, args,run,scores_dir):
             # Get current state
 
             observations_for_agent = agent.process_env_ouput()
-
-            # Get the action, note that we use act_() for training.
-            actions = agent.act_(observations_for_agent)
-
+            
+            if i%2:   
+                # Get the action, note that we use act_() for training.
+                actions = agent.act_(observations_for_agent)
+            else:
+                actions = {}
             # Interacts with the environment and get the reward.
             observations, rewards, dones, info = env.step(actions)
 
@@ -365,21 +367,23 @@ def train(agent_spec, gym_cfg, args,run,scores_dir):
 
             # Get the next action
             agent.implement_to_road_map(agent.vehicle_info_map(info))
+
             new_observations_for_agent = agent.process_env_ouput()
+            if not i%2:
+            
+                # Get rewards
+                rewards_list = agent.calculate_rewards()
+                # Remember (state, action, reward, next_state) into memory buffer.
+                for id in agent_id_list:
+                    agent.remember(observations_for_agent[id], actions[id], rewards_list[id],
+                                   new_observations_for_agent[id])
+                    episodes_rewards[id] += rewards_list[id]
+                    rewards_archive[id].append(rewards_list[id])
 
-            # Get rewards
-            rewards_list = agent.calculate_rewards()
-            # Remember (state, action, reward, next_state) into memory buffer.
-            for id in agent_id_list:
-                agent.remember(observations_for_agent[id], actions[id], rewards_list[id],
-                               new_observations_for_agent[id])
-                episodes_rewards[id] += rewards_list[id]
-                rewards_archive[id].append(rewards_list[id])
 
-
-            episodes_decision_num += len(agent_id_list)
-            total_decision_num += len(agent_id_list)
-            update_counter += len(agent_id_list)
+                episodes_decision_num += len(agent_id_list)
+                total_decision_num += len(agent_id_list)
+                update_counter += len(agent_id_list)
 
             # Update the network
             if total_decision_num > agent.learning_start:

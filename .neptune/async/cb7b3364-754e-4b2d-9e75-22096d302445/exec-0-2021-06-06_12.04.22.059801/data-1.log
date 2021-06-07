@@ -1,0 +1,129 @@
+{"obj": {"type": "AssignString", "path": ["sys", "name"], "value": "Untitled"}, "version": 1}
+{"obj": {"type": "AssignString", "path": ["sys", "description"], "value": ""}, "version": 2}
+{"obj": {"type": "AssignString", "path": ["sys", "hostname"], "value": "d01ab3e31bda"}, "version": 3}
+{"obj": {"type": "AssignBool", "path": ["sys", "failed"], "value": false}, "version": 4}
+{"obj": {"type": "ClearStringLog", "path": ["monitoring", "stdout"]}, "version": 5}
+{"obj": {"type": "ClearStringLog", "path": ["monitoring", "stderr"]}, "version": 6}
+{"obj": {"type": "AssignString", "path": ["source_code", "entrypoint"], "value": "train_dqn_example.py"}, "version": 7}
+{"obj": {"type": "UploadFileSet", "path": ["source_code", "files"], "file_globs": ["/starter-kit/train_dqn_example.py"], "reset": "False"}, "version": 8}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stdout"], "values": [{"value": "", "step": null, "ts": 1622981062.1967077}]}, "version": 9}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stdout"], "values": [{"value": "https://app.neptune.ai/TensorCell/KDD/e/KDD-23\n", "step": null, "ts": 1622981062.198023}]}, "version": 10}
+{"obj": {"type": "AssignString", "path": ["parameters", "input_dir"], "value": "agent"}, "version": 11}
+{"obj": {"type": "AssignString", "path": ["parameters", "output_dir"], "value": "out"}, "version": 12}
+{"obj": {"type": "AssignString", "path": ["parameters", "sim_cfg"], "value": "cfg/simulator_small.cfg"}, "version": 13}
+{"obj": {"type": "AssignInt", "path": ["parameters", "metric_period"], "value": 3600}, "version": 14}
+{"obj": {"type": "AssignFloat", "path": ["parameters", "threshold"], "value": 1.6}, "version": 15}
+{"obj": {"type": "AssignString", "path": ["parameters", "model_name"], "value": "models_for_him/round_180.h5"}, "version": 16}
+{"obj": {"type": "AssignInt", "path": ["parameters", "memory_size"], "value": 50000000}, "version": 17}
+{"obj": {"type": "AssignInt", "path": ["parameters", "batch_size"], "value": 32}, "version": 18}
+{"obj": {"type": "AssignInt", "path": ["parameters", "learning_start"], "value": 10000}, "version": 19}
+{"obj": {"type": "AssignString", "path": ["parameters", "roadnet_size"], "value": "small"}, "version": 20}
+{"obj": {"type": "AssignFloat", "path": ["parameters", "epsilon"], "value": 0.2}, "version": 21}
+{"obj": {"type": "AssignFloat", "path": ["parameters", "gamma"], "value": 0.98}, "version": 22}
+{"obj": {"type": "AssignFloat", "path": ["parameters", "learning_rate"], "value": 0.0005}, "version": 23}
+{"obj": {"type": "AssignInt", "path": ["parameters", "thread"], "value": 40}, "version": 24}
+{"obj": {"type": "AssignInt", "path": ["parameters", "steps"], "value": 360}, "version": 25}
+{"obj": {"type": "AssignInt", "path": ["parameters", "episodes"], "value": 100}, "version": 26}
+{"obj": {"type": "AssignInt", "path": ["parameters", "update_freq"], "value": 200}, "version": 27}
+{"obj": {"type": "AssignInt", "path": ["parameters", "close_value"], "value": 30}, "version": 28}
+{"obj": {"type": "AssignBool", "path": ["parameters", "save_model"], "value": true}, "version": 29}
+{"obj": {"type": "AssignBool", "path": ["parameters", "load_model"], "value": false}, "version": 30}
+{"obj": {"type": "AssignInt", "path": ["parameters", "save_rate"], "value": 10}, "version": 31}
+{"obj": {"type": "AssignString", "path": ["parameters", "save_dir"], "value": "model/dqn_mine/new"}, "version": 32}
+{"obj": {"type": "AssignString", "path": ["parameters", "log_dir"], "value": "cmd_log/dqn_warm_up"}, "version": 33}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "Using TensorFlow backend.\n", "step": null, "ts": 1622981063.5772138}]}, "version": 34}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "traceback"], "values": [{"value": "An uncaught exception occurred while run was active on worker d01ab3e31bda.", "step": null, "ts": 1622981068.0985577}, {"value": "Marking run as failed", "step": null, "ts": 1622981068.0985577}, {"value": "Traceback:", "step": null, "ts": 1622981068.0985577}, {"value": "  File \"train_dqn_example.py\", line 654, in <module>\n    train(agent_spec, gym_cfg, args,run,scores_dir)\n", "step": null, "ts": 1622981068.0985577}, {"value": "  File \"train_dqn_example.py\", line 319, in train\n    agent.agent_init(args)\n", "step": null, "ts": 1622981068.0985577}, {"value": "  File \"agent/agent_DQN.py\", line 102, in agent_init\n    self.model_A, self.model_B = self._build_model()\n", "step": null, "ts": 1622981068.0985577}, {"value": "  File \"agent/agent_DQN.py\", line 606, in _build_model\n    model_B = keras.models.load_model(self.model_name)\n", "step": null, "ts": 1622981068.0985577}, {"value": "  File \"/usr/local/lib/python3.7/dist-packages/keras/engine/saving.py\", line 492, in load_wrapper\n    return load_function(*args, **kwargs)\n", "step": null, "ts": 1622981068.0985577}, {"value": "  File \"/usr/local/lib/python3.7/dist-packages/keras/engine/saving.py\", line 584, in load_model\n    model = _deserialize_model(h5dict, custom_objects, compile)\n", "step": null, "ts": 1622981068.0985577}, {"value": "  File \"/usr/local/lib/python3.7/dist-packages/keras/engine/saving.py\", line 374, in _deserialize_model\n    model._make_train_function()\n", "step": null, "ts": 1622981068.0985577}, {"value": "  File \"/usr/local/lib/python3.7/dist-packages/keras/engine/training.py\", line 316, in _make_train_function\n    loss=self.total_loss)\n", "step": null, "ts": 1622981068.0985577}, {"value": "  File \"/usr/local/lib/python3.7/dist-packages/keras/legacy/interfaces.py\", line 91, in wrapper\n    return func(*args, **kwargs)\n", "step": null, "ts": 1622981068.0985577}, {"value": "  File \"/usr/local/lib/python3.7/dist-packages/keras/optimizers.py\", line 536, in get_updates\n    m_t = (self.beta_1 * m) + (1. - self.beta_1) * g\n", "step": null, "ts": 1622981068.0985577}, {"value": "  File \"/usr/local/lib/python3.7/dist-packages/tensorflow_core/python/ops/variables.py\", line 1079, in _run_op\n    return tensor_oper(a.value(), *args, **kwargs)\n", "step": null, "ts": 1622981068.0985577}, {"value": "  File \"/usr/local/lib/python3.7/dist-packages/tensorflow_core/python/ops/resource_variable_ops.py\", line 524, in value\n    return self._read_variable_op()\n", "step": null, "ts": 1622981068.0985577}, {"value": "  File \"/usr/local/lib/python3.7/dist-packages/tensorflow_core/python/ops/resource_variable_ops.py\", line 608, in _read_variable_op\n    self._dtype)\n", "step": null, "ts": 1622981068.0985577}, {"value": "  File \"/usr/local/lib/python3.7/dist-packages/tensorflow_core/python/ops/gen_resource_variable_ops.py\", line 587, in read_variable_op\n    \"ReadVariableOp\", resource=resource, dtype=dtype, name=name)\n", "step": null, "ts": 1622981068.0985577}, {"value": "  File \"/usr/local/lib/python3.7/dist-packages/tensorflow_core/python/framework/op_def_library.py\", line 794, in _apply_op_helper\n    op_def=op_def)\n", "step": null, "ts": 1622981068.0985577}, {"value": "  File \"/usr/local/lib/python3.7/dist-packages/tensorflow_core/python/util/deprecation.py\", line 507, in new_func\n    return func(*args, **kwargs)\n", "step": null, "ts": 1622981068.0985577}, {"value": "  File \"/usr/local/lib/python3.7/dist-packages/tensorflow_core/python/framework/ops.py\", line 3357, in create_op\n    attrs, op_def, compute_device)\n", "step": null, "ts": 1622981068.0985577}, {"value": "  File \"/usr/local/lib/python3.7/dist-packages/tensorflow_core/python/framework/ops.py\", line 3426, in _create_op_internal\n    op_def=op_def)\n", "step": null, "ts": 1622981068.0985577}, {"value": "  File \"/usr/local/lib/python3.7/dist-packages/tensorflow_core/python/framework/ops.py\", line 1770, in __init__\n    control_input_ops)\n", "step": null, "ts": 1622981068.0985577}, {"value": "  File \"/usr/local/lib/python3.7/dist-packages/tensorflow_core/python/framework/ops.py\", line 1600, in _create_c_op\n    for name, attr_value in node_def.attr.items():\n", "step": null, "ts": 1622981068.0985577}, {"value": "  File \"/usr/lib/python3.7/_collections_abc.py\", line 678, in items\n    return ItemsView(self)\n", "step": null, "ts": 1622981068.0985577}, {"value": "  File \"/usr/lib/python3.7/_collections_abc.py\", line 698, in __init__\n    def __init__(self, mapping):\n", "step": null, "ts": 1622981068.0985577}, {"value": "", "step": null, "ts": 1622981068.0985577}]}, "version": 35}
+{"obj": {"type": "AssignBool", "path": ["sys", "failed"], "value": true}, "version": 36}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "Traceback (most recent call last):\n", "step": null, "ts": 1622981068.111041}]}, "version": 37}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"train_dqn_example.py\", line 654, in <module>\n", "step": null, "ts": 1622981068.117934}]}, "version": 38}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622981068.1185517}]}, "version": 39}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "train(agent_spec, gym_cfg, args,run,scores_dir)", "step": null, "ts": 1622981068.1187184}]}, "version": 40}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622981068.1190255}]}, "version": 41}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"train_dqn_example.py\", line 319, in train\n", "step": null, "ts": 1622981068.1193285}]}, "version": 42}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622981068.1197965}]}, "version": 43}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "agent.agent_init(args)", "step": null, "ts": 1622981068.1199574}]}, "version": 44}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622981068.120296}]}, "version": 45}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"agent/agent_DQN.py\", line 102, in agent_init\n", "step": null, "ts": 1622981068.1206079}]}, "version": 46}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622981068.1210437}]}, "version": 47}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "self.model_A, self.model_B = self._build_model()", "step": null, "ts": 1622981068.121231}]}, "version": 48}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622981068.1215827}]}, "version": 49}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"agent/agent_DQN.py\", line 606, in _build_model\n", "step": null, "ts": 1622981068.1223419}]}, "version": 50}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622981068.1229532}]}, "version": 51}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "model_B = keras.models.load_model(self.model_name)", "step": null, "ts": 1622981068.1230803}]}, "version": 52}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622981068.1236694}]}, "version": 53}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/usr/local/lib/python3.7/dist-packages/keras/engine/saving.py\", line 492, in load_wrapper\n", "step": null, "ts": 1622981068.124001}]}, "version": 54}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622981068.1245294}]}, "version": 55}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "return load_function(*args, **kwargs)", "step": null, "ts": 1622981068.1246696}]}, "version": 56}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622981068.1249726}]}, "version": 57}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/usr/local/lib/python3.7/dist-packages/keras/engine/saving.py\", line 584, in load_model\n", "step": null, "ts": 1622981068.1252809}]}, "version": 58}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622981068.1258786}]}, "version": 59}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "model = _deserialize_model(h5dict, custom_objects, compile)", "step": null, "ts": 1622981068.1260083}]}, "version": 60}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622981068.1262958}]}, "version": 61}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/usr/local/lib/python3.7/dist-packages/keras/engine/saving.py\", line 374, in _deserialize_model\n", "step": null, "ts": 1622981068.1266057}]}, "version": 62}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622981068.1271052}]}, "version": 63}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "model._make_train_function()", "step": null, "ts": 1622981068.1272385}]}, "version": 64}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622981068.1275625}]}, "version": 65}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/usr/local/lib/python3.7/dist-packages/keras/engine/training.py\", line 316, in _make_train_function\n", "step": null, "ts": 1622981068.1278777}]}, "version": 66}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622981068.1283722}]}, "version": 67}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "loss=self.total_loss)", "step": null, "ts": 1622981068.1285243}]}, "version": 68}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622981068.1288471}]}, "version": 69}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/usr/local/lib/python3.7/dist-packages/keras/legacy/interfaces.py\", line 91, in wrapper\n", "step": null, "ts": 1622981068.1291454}]}, "version": 70}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622981068.1295614}]}, "version": 71}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "return func(*args, **kwargs)", "step": null, "ts": 1622981068.129812}]}, "version": 72}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622981068.1301095}]}, "version": 73}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/usr/local/lib/python3.7/dist-packages/keras/optimizers.py\", line 536, in get_updates\n", "step": null, "ts": 1622981068.1304278}]}, "version": 74}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622981068.1309526}]}, "version": 75}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "m_t = (self.beta_1 * m) + (1. - self.beta_1) * g", "step": null, "ts": 1622981068.131087}]}, "version": 76}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622981068.1314073}]}, "version": 77}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/usr/local/lib/python3.7/dist-packages/tensorflow_core/python/ops/variables.py\", line 1079, in _run_op\n", "step": null, "ts": 1622981068.131722}]}, "version": 78}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622981068.1323767}]}, "version": 79}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "return tensor_oper(a.value(), *args, **kwargs)", "step": null, "ts": 1622981068.1325061}]}, "version": 80}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622981068.1327899}]}, "version": 81}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/usr/local/lib/python3.7/dist-packages/tensorflow_core/python/ops/resource_variable_ops.py\", line 524, in value\n", "step": null, "ts": 1622981068.1330974}]}, "version": 82}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622981068.133614}]}, "version": 83}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "return self._read_variable_op()", "step": null, "ts": 1622981068.1338105}]}, "version": 84}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622981068.134077}]}, "version": 85}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/usr/local/lib/python3.7/dist-packages/tensorflow_core/python/ops/resource_variable_ops.py\", line 608, in _read_variable_op\n", "step": null, "ts": 1622981068.134389}]}, "version": 86}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622981068.1349492}]}, "version": 87}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "self._dtype)", "step": null, "ts": 1622981068.1350718}]}, "version": 88}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622981068.1353536}]}, "version": 89}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/usr/local/lib/python3.7/dist-packages/tensorflow_core/python/ops/gen_resource_variable_ops.py\", line 587, in read_variable_op\n", "step": null, "ts": 1622981068.1356688}]}, "version": 90}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622981068.136197}]}, "version": 91}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\"ReadVariableOp\", resource=resource, dtype=dtype, name=name)", "step": null, "ts": 1622981068.136342}]}, "version": 92}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622981068.1366315}]}, "version": 93}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/usr/local/lib/python3.7/dist-packages/tensorflow_core/python/framework/op_def_library.py\", line 794, in _apply_op_helper\n", "step": null, "ts": 1622981068.1369386}]}, "version": 94}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622981068.137578}]}, "version": 95}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "op_def=op_def)", "step": null, "ts": 1622981068.1377652}]}, "version": 96}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622981068.1380086}]}, "version": 97}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/usr/local/lib/python3.7/dist-packages/tensorflow_core/python/util/deprecation.py\", line 507, in new_func\n", "step": null, "ts": 1622981068.1383214}]}, "version": 98}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622981068.1389325}]}, "version": 99}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "return func(*args, **kwargs)", "step": null, "ts": 1622981068.1390738}]}, "version": 100}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622981068.1393676}]}, "version": 101}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/usr/local/lib/python3.7/dist-packages/tensorflow_core/python/framework/ops.py\", line 3357, in create_op\n", "step": null, "ts": 1622981068.139681}]}, "version": 102}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622981068.1408048}]}, "version": 103}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "attrs, op_def, compute_device)", "step": null, "ts": 1622981068.1409361}]}, "version": 104}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622981068.1412182}]}, "version": 105}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/usr/local/lib/python3.7/dist-packages/tensorflow_core/python/framework/ops.py\", line 3426, in _create_op_internal\n", "step": null, "ts": 1622981068.1415265}]}, "version": 106}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622981068.142593}]}, "version": 107}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "op_def=op_def)", "step": null, "ts": 1622981068.1427164}]}, "version": 108}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622981068.143002}]}, "version": 109}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/usr/local/lib/python3.7/dist-packages/tensorflow_core/python/framework/ops.py\", line 1770, in __init__\n", "step": null, "ts": 1622981068.1433206}]}, "version": 110}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622981068.1441147}]}, "version": 111}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "control_input_ops)", "step": null, "ts": 1622981068.14424}]}, "version": 112}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622981068.1445246}]}, "version": 113}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/usr/local/lib/python3.7/dist-packages/tensorflow_core/python/framework/ops.py\", line 1600, in _create_c_op\n", "step": null, "ts": 1622981068.144833}]}, "version": 114}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622981068.1456323}]}, "version": 115}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "for name, attr_value in node_def.attr.items():", "step": null, "ts": 1622981068.1458187}]}, "version": 116}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622981068.146073}]}, "version": 117}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/usr/lib/python3.7/_collections_abc.py\", line 678, in items\n", "step": null, "ts": 1622981068.1463797}]}, "version": 118}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622981068.146937}]}, "version": 119}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "return ItemsView(self)", "step": null, "ts": 1622981068.1470628}]}, "version": 120}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622981068.1473432}]}, "version": 121}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/usr/lib/python3.7/_collections_abc.py\", line 698, in __init__\n", "step": null, "ts": 1622981068.147652}]}, "version": 122}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1622981068.1482084}]}, "version": 123}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "def __init__(self, mapping):", "step": null, "ts": 1622981068.1483355}]}, "version": 124}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622981068.1486142}]}, "version": 125}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "KeyboardInterrupt", "step": null, "ts": 1622981068.148982}]}, "version": 126}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "", "step": null, "ts": 1622981068.1492612}]}, "version": 127}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1622981068.1496027}]}, "version": 128}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stdout"], "values": [{"value": "Shutting down background jobs, please wait a moment...\n", "step": null, "ts": 1622981068.1502285}]}, "version": 129}
